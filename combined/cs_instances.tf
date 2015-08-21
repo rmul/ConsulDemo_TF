@@ -133,7 +133,7 @@ resource "null_resource" "cs_basicconfig" {
 	      "mkdir c:\consul\config",
 	      "mkdir c:\consul\var\log",
 	      "curl -o C:\consul\config\config.json https://raw.githubusercontent.com/rmul/flapflap/master/overall_config.json --insecure -L",
-	      "sed -i.repl -e 's/#NODENAME#/csconsuldem${count.index}/g' -e 's/#PUBLICIP#/${element(cloudstack_ipaddress.consuldemo.*.ipaddress, count.index)}/g' -e 's/#DC#/ConsulDemo/g' -e 's/#JOINNODES#/${join("\\\",\\\"",concat(aws_instance.consuldemo.*.public_ip,cloudstack_ipaddress.consuldemo.*.ipaddress))}/g' C:\consul\config\config.json",
+	      "sed -i.repl -e 's/#NODENAME#/csconsuldemo${count.index}/g' -e 's/#PUBLICIP#/${element(cloudstack_ipaddress.consuldemo.*.ipaddress, count.index)}/g' -e 's/#DC#/ConsulDemo/g' -e 's/#JOINNODES#/${join("\\\",\\\"",concat(aws_instance.consuldemo.*.public_ip,cloudstack_ipaddress.consuldemo.*.ipaddress))}/g' C:\consul\config\config.json",
 	      "nssm install Consul c:\consul\bin\consul.exe agent --config-dir c:\consul\config",
 	      "nssm set Consul AppStdout C:\consul\var\log\consul.log",
 	      "nssm set Consul AppStderr C:\consul\var\log\consul_error.log",

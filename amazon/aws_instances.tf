@@ -22,8 +22,8 @@ resource "null_resource" "consulconfig" {
     host= "${element(aws_instance.consuldemo.*.public_ip, count.index)}"
     type = "winrm"
     timeout = "30m"
-    user = "packer"
-    password = "P@ck3r99!"
+    user = "${var.aws_instance_user}"
+    password = "${var.aws_instance_password}"
   }
   provisioner "remote-exec" {
     inline = [
