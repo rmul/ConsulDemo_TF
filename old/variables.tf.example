@@ -1,0 +1,100 @@
+# Add your variables here :)
+
+variable "instance_user" {
+  description = "The user to use in connections."
+  default = "user"
+}
+variable "instance_password" {
+  description = "The password for the user used in connections."
+  default = "password"
+}
+
+variable "access_key" {
+  description = "The aws access key."
+  default = ""
+}
+
+variable "secret_key" {
+  description = "The aws secret key."
+  default = ""
+}
+
+variable "region" {
+  description = "The AWS region to create resources in."
+  default = "eu-west-1"
+}
+
+variable "region" {
+  description = "The AWS region to create resources in."
+  default = "eu-west-1"
+}
+
+variable "availability_zone" {
+  description = "Availability zone for Fusang."
+  default = {
+    a = "eu-west-1a"
+    b = "eu-west-1b"
+    c = "eu-west-1c"
+  }
+}
+
+variable "vpc_cidr_block" {
+  description = "Cidr block for the VPC."
+  default = "10.0.0.0/16"
+}
+
+variable "subnet_availability_zone" {
+  description = "Availability zone for Fusang subnet."
+  default = {
+    a = "eu-west-1a"
+    b = "eu-west-1b"
+    c = "eu-west-1c"
+  }
+}
+
+variable "public_subnet_cidr_block" {
+  description = "CIDR for public subnet"
+  default = {
+    a     = "10.0.1.0/24"
+    b     = "10.0.2.0/24"
+    c     = "10.0.3.0/24"
+  }
+}
+
+variable "instance_type" {
+  description = "Ambari means master, will rename quiet a lot of variables later on to make things more clear ;-)"
+  default = {
+    consuldemo = "m4.large"
+  }
+}
+
+variable "instance_ami" {
+  description = "The AMI's that are created from the packer builds, please be AWARE that the packer builds make use of the official CentOS 7 ami's, this means you can't publish them public."
+  default = {
+    consuldemo    = "ami-xxxxxxxx"
+  }
+}
+
+variable "security_group" {
+  default = {
+    cidr_blocks      = "0.0.0.0/0"
+  }
+}
+
+variable "route53_public_horizon" {
+ description = "Information for public hosted zone, should be pre-registered, because of the fact that DNS is slow with replication of it's NS servers."
+ default = {
+ zone_id     = ""
+ }
+}
+
+# The Ambari way of deploying Hadoop is a bit weird, it does a lot of automatic hostname detections and stuff, which fails miserable in a AWS environment, esspecially when you want to deliver the platform on a public level (lots of redirection to internal AWS hostnames).
+
+variable "domain_name" {
+ description = "Public AND private DNS name, not used right now, will be used in the very near future."
+ default = {
+   full    = "sub.zone"
+   sub     = "sub"
+   zone    = "zone"
+ }
+}
